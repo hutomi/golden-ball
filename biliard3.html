@@ -6,37 +6,50 @@
   <title>Golden Ball – Fejlődjünk Együtt!</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    /* Simple fade-up animation for hero text */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-gray-100 font-sans">
 
 <!-- HEADER -->
-<header class="w-full bg-black bg-opacity-90 backdrop-blur-md z-50 fixed"" x-data="{ open:false }">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+<header class="w-full bg-black bg-opacity-90 backdrop-blur-md z-50 fixed top-0" x-data="{ open:false }">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
 
     <!-- Logo -->
     <div class="flex items-center space-x-3">
       <div class="w-10 h-10 rounded-full bg-yellow-400 text-black font-bold flex items-center justify-center text-xl">9</div>
-      <span class="text-xl font-bold text-yellow-400">Golden Ball</span>
+      <span class="text-xl font-bold text-yellow-400 tracking-wide">Golden Ball</span>
     </div>
 
     <!-- Desktop Menü -->
-    <nav class="hidden md:flex space-x-8 text-lg">
-      <a href="#asztalfoglalas" class="hover:text-yellow-400">Asztalfoglalás</a>
-      <a href="#versenyek" class="hover:text-yellow-400">Versenyek</a>
-      <a href="#klubtagsag" class="hover:text-yellow-400">Klubtagság</a>
-      <a href="#elmenyek" class="hover:text-yellow-400">Élmények</a>
-      <a href="#kapcsolat" class="hover:text-yellow-400">Csatlakozz</a>
+    <nav class="hidden md:flex space-x-8 text-sm lg:text-base">
+      <a href="#asztalfoglalas" class="hover:text-yellow-400 transition">Asztalfoglalás</a>
+      <a href="#versenyek" class="hover:text-yellow-400 transition">Versenyek</a>
+      <a href="#klubtagsag" class="hover:text-yellow-400 transition">Klubtagság</a>
+      <a href="#elmenyek" class="hover:text-yellow-400 transition">Élmények</a>
+      <a href="#kapcsolat" class="hover:text-yellow-400 transition">Csatlakozz</a>
     </nav>
 
     <!-- Login ikon -->
-    <div class="hidden md:block text-3xl cursor-pointer hover:text-yellow-400">🎱</div>
+    <div class="hidden md:block text-3xl cursor-pointer hover:text-yellow-400" title="Belépés">🎱</div>
 
     <!-- Mobile hamburger -->
-    <button class="md:hidden text-3xl" @click="open = !open">☰</button>
+    <button class="md:hidden text-3xl focus:outline-none" @click="open = !open">
+      <span x-show="!open">☰</span>
+      <span x-show="open">✕</span>
+    </button>
   </div>
 
   <!-- Mobile Menü -->
-  <div x-show="open" class="md:hidden bg-black/90 p-4 space-y-3 text-center">
+  <div x-show="open" class="md:hidden bg-black/95 p-4 space-y-3 text-center">
     <a href="#asztalfoglalas" class="block py-2 hover:text-yellow-400">Asztalfoglalás</a>
     <a href="#versenyek" class="block py-2 hover:text-yellow-400">Versenyek</a>
     <a href="#klubtagsag" class="block py-2 hover:text-yellow-400">Klubtagság</a>
@@ -46,89 +59,182 @@
 </header>
 
 <!-- HERO -->
-<section class="relative h-screen flex items-center justify-center text-center px-6">
-  <div class="absolute inset-0 bg-cover bg-center" style="background-image:url(9ball.jpg);"></div>
-  <div class="absolute inset-0 bg-black/60"></div>
+<section class="relative h-screen flex items-center justify-center text-center px-6 pt-20">
+  <!-- Background image -->
+  <div class="absolute inset-0 bg-cover bg-center brightness-75" style="background-image:url('9ball.jpg');"></div>
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 bg-black/55"></div>
 
-  <div class="relative z-10 max-w-3xl mx-auto backdrop-blur-xl backdrop-brightness-50 rounded-md">
-    <h1 class="text-5xl md:text-6xl font-bold text-yellow-400 mb-4">Fejlődjünk Együtt!</h1>
-    <p class="text-2xl md:text-3xl font-semibold mb-6">Ahol a biliárd sport!</p>
-    <a href="#rolunk" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold px-8 py-4 rounded-xl transition">Fedezd fel a klubot</a>
+  <div class="relative z-10 max-w-3xl mx-auto bg-black/45 backdrop-blur-md rounded-xl p-8 md:p-12 shadow-2xl fade-up">
+    <p class="text-sm uppercase tracking-[0.2em] text-gray-300 mb-3">Fejlődjünk Együtt Biliárd Sportklub</p>
+    <h1 class="text-4xl md:text-6xl font-extrabold text-yellow-400 mb-4 leading-tight">
+      Fejlődjünk Együtt.
+    </h1>
+    <p class="text-xl md:text-2xl font-semibold mb-6 text-gray-100">
+      Ahol a biliárd <span class="text-yellow-300">sport</span>.
+    </p>
+    <a href="#rolunk" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold px-8 py-3 rounded-xl transition shadow-lg">
+      Fedezd fel a klubot
+    </a>
+    <div class="mt-6 text-gray-300 text-sm flex flex-col items-center gap-1">
+      <span class="h-px w-16 bg-yellow-500 mb-1"></span>
+      <span class="opacity-80">Görgess lejjebb</span>
+      <span class="animate-bounce text-xl">↓</span>
+    </div>
   </div>
 </section>
 
+<!-- ÉLMÉNYEK / MIÉRT VÁLASSZ MINKET -->
 <section id="elmenyek" class="bg-gray-800 py-20">
-  <div class="container mx-auto text-center px-6">
-    <h2 class="text-3xl font-bold text-yellow-400 mb-10">Miért válaszd a Golden Ball klubot?</h2>
-    <div class="grid md:grid-cols-4 gap-12">
-      <div>
-        <div class="text-5xl mb-4">🏆</div>
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-yellow-400 mb-10 text-center">Miért válaszd a Golden Ball klubot?</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+      <div class="bg-gray-900/60 rounded-xl p-6 shadow-md">
+        <div class="text-4xl mb-3">🏆</div>
         <h3 class="text-xl font-bold mb-2">Profi környezet</h3>
-        <p class="text-gray-400">Világszínvonalú asztalok és felszerelések.</p>
+        <p class="text-gray-300 text-sm">
+          Világszínvonalú 9-ball asztalok, profi dákók és versenyszintű felszerelés vár.
+        </p>
       </div>
-      <div>
-        <div class="text-5xl mb-4">🤝</div>
-        <h3 class="text-xl font-bold mb-2">Közösség</h3>
-        <p class="text-gray-400">Támogató társaság a fejlődésért.</p>
+
+      <div class="bg-gray-900/60 rounded-xl p-6 shadow-md">
+        <div class="text-4xl mb-3">🤝</div>
+        <h3 class="text-xl font-bold mb-2">Erős közösség</h3>
+        <p class="text-gray-300 text-sm">
+          Olyan társaság, ahol a kezdőtől a profiig mindenki együtt fejlődik.
+        </p>
       </div>
-      <div>
-        <div class="text-5xl mb-4">🔥</div>
-        <h3 class="text-xl font-bold mb-2">Versenyek</h3>
-        <p class="text-gray-400">Rendszeres események és kihívások.</p>
+
+      <div class="bg-gray-900/60 rounded-xl p-6 shadow-md">
+        <div class="text-4xl mb-3">🔥</div>
+        <h3 class="text-xl font-bold mb-2">Versenyélmény</h3>
+        <p class="text-gray-300 text-sm">
+          Háziversenyek, ranglisták és közvetítések – érezd magad igazi tornán.
+        </p>
       </div>
-      <div>
-        <div class="text-5xl mb-4">🎯</div>
-        <h3 class="text-xl font-bold mb-2">Fejlődés</h3>
-        <p class="text-gray-400">Edzések és útmutatás minden szinten.</p>
+
+      <div class="bg-gray-900/60 rounded-xl p-6 shadow-md">
+        <div class="text-4xl mb-3">🎯</div>
+        <h3 class="text-xl font-bold mb-2">Folyamatos fejlődés</h3>
+        <p class="text-gray-300 text-sm">
+          Edzések, videóelemzés és személyre szabott visszajelzés a fejlődésedért.
+        </p>
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- RÓLUNK -->
-<section id="rolunk" class="container mx-auto py-20 px-6 text-center">
+<section id="rolunk" class="max-w-4xl mx-auto py-20 px-6 text-center">
   <h2 class="text-3xl font-bold text-yellow-400 mb-6">Miért hoztuk létre a Golden Ball klubot?</h2>
-  <p class="max-w-3xl mx-auto text-lg text-gray-300 leading-relaxed">
-    Célunk, hogy újra minél több emberrel megismertessük a biliárdot, mint sportot és kihívást!
+  <p class="text-lg text-gray-300 leading-relaxed">
+    Célunk, hogy újra minél több emberrel megismertessük a biliárdot, mint sportot és kihívást.
     A Golden Ball Budapest szívében vár, ahol a legprofibb körülményeket biztosítjuk a fejlődni vágyó játékosoknak.
-    Szeretnénk egy olyan közösséget létrehozni, ahol a kezdőtől a profiig mindenki együtt fejlődhet ebben a csodálatos sportban.
+    Szeretnénk egy olyan közösséget létrehozni, ahol a kicsiktől az idősekig mindenki együtt fejlődhet ebben a csodálatos sportban.
   </p>
 </section>
 
-<!-- MIERT VALASSZ MINKET -->
-
-
-<!-- PACKAGE TEASERS -->
-<section id="klubtagsag" class="container mx-auto py-20 px-6 text-center">
+<!-- KLUBTAGSÁGI CSOMAGOK -->
+<section id="klubtagsag" class="max-w-6xl mx-auto py-20 px-6 text-center">
   <h2 class="text-3xl font-bold text-yellow-400 mb-12">Klubtagsági csomagjaink</h2>
   <div class="grid md:grid-cols-3 gap-10">
 
-    <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-500">
+    <!-- BREAK -->
+    <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 hover:border-yellow-500 transition shadow-lg flex flex-col">
       <h3 class="text-2xl font-bold text-yellow-400 mb-3">BREAK</h3>
-      <p class="text-gray-300 mb-6">Ideális kezdőknek és hobbijátékosoknak.</p>
-      <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold px-4 py-2 rounded-lg inline-block">Részletek</a>
+      <p class="text-gray-300 mb-4 text-sm">
+        Az első lépés a biliárd világába. Tökéletes kezdőknek és hobbijátékosoknak.
+      </p>
+      <ul class="text-left text-gray-300 text-sm mb-6 space-y-1">
+        <li>• Heti ingyenes játékidő</li>
+        <li>• Csoportos edzések</li>
+        <li>• Kedvezményes nevezés versenyekre</li>
+      </ul>
+      <a href="#" class="mt-auto bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold px-4 py-2 rounded-lg inline-block">
+        Részletek
+      </a>
     </div>
 
-    <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-500">
+    <!-- RUN -->
+    <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-500 shadow-2xl transform md:-translate-y-3 flex flex-col">
       <h3 class="text-2xl font-bold text-yellow-400 mb-3">RUN</h3>
-      <p class="text-gray-300 mb-6">Korlátlan játék és profi edzés.</p>
-      <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold px-4 py-2 rounded-lg inline-block">Részletek</a>
+      <p class="text-gray-300 mb-4 text-sm">
+        A versenyzők otthona – korlátlan játék, profi edzés és komoly kihívások.
+      </p>
+      <ul class="text-left text-gray-300 text-sm mb-6 space-y-1">
+        <li>• Korlátlan asztalhasználat</li>
+        <li>• Videóelemzések edzéseidről</li>
+        <li>• Személyi edzői alkalmak</li>
+      </ul>
+      <a href="#" class="mt-auto bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold px-4 py-2 rounded-lg inline-block">
+        Részletek
+      </a>
     </div>
 
-    <div class="bg-yellow-400 text-gray-900 p-6 rounded-2xl border border-yellow-600">
+    <!-- BREAK AND RUN -->
+    <div class="bg-yellow-400 text-gray-900 p-6 rounded-2xl border border-yellow-600 shadow-lg flex flex-col">
       <h3 class="text-2xl font-bold mb-3">BREAK AND RUN</h3>
-      <p class="mb-6">A VIP élmény és nemzetközi felkészítés.</p>
-      <a href="#" class="bg-gray-900 hover:bg-gray-800 text-yellow-400 font-semibold px-4 py-2 rounded-lg inline-block">Részletek</a>
+      <p class="mb-4 text-sm">
+        A VIP élmény – exkluzív események, nemzetközi felkészítés, influencer lehetőségek.
+      </p>
+      <ul class="text-left text-sm mb-6 space-y-1">
+        <li>• Minden, ami a RUN csomagban</li>
+        <li>• Priority asztalfoglalás</li>
+        <li>• Nemzetközi versenyfelkészítés</li>
+      </ul>
+      <a href="#" class="mt-auto bg-gray-900 hover:bg-gray-800 text-yellow-400 font-semibold px-4 py-2 rounded-lg inline-block">
+        Részletek
+      </a>
     </div>
 
   </div>
 </section>
 
-<!-- CTA -->
+<!-- VERSENYEK -->
+<section id="versenyek" class="bg-gray-800 py-20">
+  <div class="max-w-5xl mx-auto px-6 text-center md:text-left">
+    <h2 class="text-3xl font-bold text-yellow-400 mb-6">Versenyek & események</h2>
+    <p class="text-gray-300 mb-6">
+      Rendszeres háziversenyek, ranglisták és különleges események várnak – legyen szó kezdő vagy profi szintről.
+    </p>
+    <a href="#" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold px-6 py-3 rounded-xl">
+      Nézd meg a közelgő versenyeket
+    </a>
+  </div>
+</section>
+
+<!-- ASZTALFOGLALÁS -->
+<section id="asztalfoglalas" class="max-w-5xl mx-auto py-20 px-6">
+  <h2 class="text-3xl font-bold text-yellow-400 mb-6 text-center md:text-left">Asztalfoglalás</h2>
+  <p class="text-gray-300 mb-6 text-center md:text-left">
+    Foglalj asztalt pár kattintással, és biztosítsd a helyed a következő edzésre vagy baráti meccsre.
+  </p>
+  <!-- Placeholder form / CTA -->
+  <div class="bg-gray-800 rounded-xl p-6 md:p-8 shadow-lg flex flex-col md:flex-row gap-4 items-center">
+    <div class="flex-1 w-full">
+      <input type="text" placeholder="Neved" class="w-full mb-3 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100 focus:outline-none focus:border-yellow-500">
+      <input type="text" placeholder="E-mail címed" class="w-full mb-3 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100 focus:outline-none focus:border-yellow-500">
+      <input type="text" placeholder="Kívánt időpont / megjegyzés" class="w-full mb-3 px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100 focus:outline-none focus:border-yellow-500">
+    </div>
+    <div class="md:w-40 flex justify-center md:justify-end w-full">
+      <button class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold px-6 py-3 rounded-xl">
+        Asztalt foglalok
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / KAPCSOLAT -->
 <section id="kapcsolat" class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 text-center py-20 px-4">
   <h2 class="text-4xl font-bold mb-4">Légy része a Golden Ball közösségnek!</h2>
-  <p class="text-lg mb-8">Fejlődj, játssz és versenyezz velünk a legjobb környezetben!</p>
-  <a href="#" class="bg-gray-900 hover:bg-gray-800 text-yellow-400 font-bold px-10 py-4 rounded-xl">Csatlakozom most</a>
+  <p class="text-lg mb-8 max-w-2xl mx-auto">
+    Fejlődj, játssz és versenyezz velünk – ismerd meg a biliárdot úgy, ahogy még soha.
+  </p>
+  <a href="mailto:info@goldenball.hu" class="bg-gray-900 hover:bg-gray-800 text-yellow-400 font-bold px-10 py-4 rounded-xl inline-block">
+    Írj nekünk
+  </a>
 </section>
 
 <!-- FOOTER -->
@@ -139,4 +245,3 @@
 
 </body>
 </html>
-
